@@ -167,5 +167,27 @@ if(isset($_POST['change'])){
 }
 
 
+if(isset($_POST['save_param'])){
+    if(isset($_POST['check'])){
+        $sql = "UPDATE setting SET status=1 WHERE id=1";
+        mysqli_query ($con,$sql);
+    }else {
+        $sql = "UPDATE setting SET status=0 WHERE id=1";
+        mysqli_query ($con,$sql);
+    }
+}
 
+
+
+$msgss='';
+$sql = "SELECT * FROM setting";
+$res = mysqli_query ($con,$sql);
+if(mysqli_num_rows ($res)) {
+    $row = mysqli_fetch_assoc ( $res );
+    if ( $row[ 'status' ] == 1 ) {
+        $msgss = "<style>#num{display: none;}</style><input type=\"checkbox\" name=\"checks\"  style='width:30px; height:30px;' checked>";
+    } else {
+        echo   "<style>.tamashi {display: none;}</style>";
+    }
+}
 ?>

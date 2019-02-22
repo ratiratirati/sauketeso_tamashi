@@ -27,6 +27,7 @@ if(isset($_GET['logout'])){
         <div id="myDropdown" class="dropdown-content">
             <a href="shedegebi.php">შედეგები</a>
             <a href="saitzea.php">საიტზე</a>
+            <a href="parametrs.php">პარამეტრები</a>
             <a href="admin.php?logout='1'">გამოსვლა</a>
         </div>
     </div>

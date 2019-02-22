@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="css/saitzea.css">
+    <link rel="stylesheet" type="text/css" href="css/paramets.css">
     <link rel="stylesheet" type="text/css" href="css/fonts.css">
     <link rel="stylesheet" href="css/boostrap.css">
     <script src="dropdown.js"></script>
@@ -33,30 +33,13 @@ if(isset($_GET['logout'])){
         </div>
     </div>
 </div>
-
-<div class="saitze">
-    <table>
-        <tr>
-            <th>username</th>
-            <th>status</th>
-        </tr>
-
-        <?php
-
-        $sql = "SELECT * FROM users";
-        $res = mysqli_query($con,$sql);
-        if(mysqli_num_rows($res)){
-            while ($row = mysqli_fetch_assoc($res)){
-                if($row['status'] == 1){
-                    echo '<tr><td>'.$row['username'].' </td><td><img src="img/online.png" style="width: 80px;"> </td></tr>';
-                }
-            }
-
-        }
-
-        ?>
-
-    </table>
+<div class="paramters">
+    <form method="post" action="parametrs.php">
+            <?php echo $msgss;?>
+        <input id="num" type="checkbox" name="check" style='width:30px; height:30px;'>       <p>თამაში</p>
+        <br>
+        <button name="save_param">პარამეტრის შენახვა</button>
+    </form>
 </div>
 </body>
 </html>
