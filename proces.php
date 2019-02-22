@@ -130,4 +130,42 @@ if(isset($_GET['logout'])){
     mysqli_query ($con,$sql);
 }
 
+
+if(isset($_POST['change'])){
+    $dzveli_pas = mysqli_real_escape_string ($con,$_POST['dzveli_pas']);
+    $axali_pas = mysqli_real_escape_string ($con,$_POST['axali_pas']);
+
+    if(empty($dzveli_pas)){
+       array_push ($errors,'ძველი პაროლის ველი ცარიელია');
+    }
+
+    if(empty($axali_pas)){
+        array_push ($errors,'ახალი პაროლის ველი ცარიელია');
+    }
+
+    $sql = "SELECT * FROM users WHERE id='".$_SESSION['user_id']."'";
+    $result = mysqli_query ($con,$sql);
+    if(mysqli_num_rows ($result)){
+        $row = mysqli_fetch_assoc ($result);
+        $dzveli =  $row['password'];
+    }
+
+
+    if(count ($errors) == 0 ){
+        $axali_pas = md5($axali_pas);
+        if($dzveli ==  md5($dzveli_pas)){
+        $sql = "UPDATE users SET password='$axali_pas' WHERE id='".$_SESSION['user_id']."'";
+        if(mysqli_query ($con,$sql)){
+            $msg = '<img src="img/success.gif" style="width: 70px; padding-bottom: 10px;"><br>პაროლი წარმატებით შეიცვალა<iframe src="sound/success.mp3" allow="autoplay" style="display: none;"></iframe>';
+        }else{
+            array_push ($errors,'ვერ შეიცვლალა');
+        }
+        }else{
+            array_push ($errors,'ვერ შეიცვლალა');
+        }
+    }
+}
+
+
+
 ?>
